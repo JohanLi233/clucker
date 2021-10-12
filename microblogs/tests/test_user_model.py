@@ -1,5 +1,6 @@
+"""Unit Test for the User model"""
 from django.test import TestCase
-from .models import User
+from microblogs.models import User
 from django.core.exceptions import ValidationError
 
 # def factorial(integer):
@@ -32,7 +33,7 @@ from django.core.exceptions import ValidationError
 #             factorial(-1)
 
 class UserModelTestCase(TestCase):
-
+    """Unit Test for the User model"""
     def setUp(self):
         self.user = User.objects.create_user(
             '@Jaha',
