@@ -10,7 +10,7 @@ class UserListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-
+        
 
 def home(request):
     return render(request, 'home.html')
@@ -20,8 +20,8 @@ def users(request):
     return render(request, 'user_list.html', {'ListView': list})
 
 def feed(request):
-    form = PostForm()
-    return render(request, 'feed.html', {'form': form})
+    #form = PostForm()
+    return render(request, 'feed.html')
 
 def sign_up(request):
     if request.method == 'POST':

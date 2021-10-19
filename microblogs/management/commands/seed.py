@@ -13,7 +13,7 @@ class Command(BaseCommand):
                 username = '@' + self.faker.user_name(),
                 first_name = self.faker.first_name(),
                 last_name = self.faker.last_name(),
-                bio = 'I am a faker user',
+                bio = 'I am a fake user',
                 email = self.faker.ascii_email()
                 )
             user.save()
