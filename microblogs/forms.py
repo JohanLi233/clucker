@@ -1,5 +1,6 @@
 from django import forms
 from .models import User
+from .models import Post
 from django.core.validators import RegexValidator
 
 class LogInForm(forms.Form):
@@ -40,3 +41,9 @@ class SignUpForm(forms.ModelForm):
             password=self.cleaned_data.get('new_password'),
          )
          return user
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['text']
+        widgets = {'text': forms.Textarea() }

@@ -1,13 +1,27 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
-from .forms import LogInForm, SignUpForm
+from .forms import LogInForm, SignUpForm, PostForm
 from django.contrib import messages
+from .models import User;
+from django.views import generic
+
+class UserListView(generic.ListView):
+    model = User
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
 
 def home(request):
     return render(request, 'home.html')
 
+def users(request):
+    list = UserListView
+    return render(request, 'user_list.html', {'ListView': list})
+
 def feed(request):
-    return render(request, 'feed.html')
+    form = PostForm()
+    return render(request, 'feed.html', {'form': form})
 
 def sign_up(request):
     if request.method == 'POST':

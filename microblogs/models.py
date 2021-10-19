@@ -31,7 +31,7 @@ class User(AbstractUser):
     blank = False
     )
 
-class Post():
+class Post(models.Model):
     author = models.ForeignKey(
         'User',
         on_delete=models.CASCADE,
@@ -39,7 +39,6 @@ class Post():
     )
     text = models.CharField(
         max_length = 280
-
     )
     created_at = models.DateField(auto_now_add=True)
     class Meta:
