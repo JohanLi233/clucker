@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from .forms import LogInForm, SignUpForm, PostForm
 from django.contrib import messages
-from .models import User;
+from .models import User, Post;
 from django.views import generic
 
 class UserListView(generic.ListView):
@@ -10,7 +10,15 @@ class UserListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-        
+
+# def new_post(request):
+#     return render(request, 'feed.html')
+
+
+def show_user(request, user_id):
+    user = User.objects.filter(id=user_id)
+    #reverse('show_user', kwargs={'user_id': id})
+    return render(request, 'show_user.html')
 
 def home(request):
     return render(request, 'home.html')
@@ -20,8 +28,8 @@ def users(request):
     return render(request, 'user_list.html', {'ListView': list})
 
 def feed(request):
-    #form = PostForm()
-    return render(request, 'feed.html')
+    form = PostForm()
+    return render(request, 'feed.html', {'form': form})
 
 def sign_up(request):
     if request.method == 'POST':
