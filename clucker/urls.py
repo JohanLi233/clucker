@@ -25,7 +25,7 @@ urlpatterns = [
     path('log_out/', views.log_out, name='log_out'),
     path('sign_up/', views.sign_up, name='sign_up'),
     path('users/', views.UserListView.as_view(), name='user_list'),
-    # path('new_post/', views.new_post, name='new_post'),
-    path('post/', views.sign_up, name='sign_up'),
+    path('new_post/', views.new_post, name='new_post'),
+    # path('post/', views.post, name='post'),
     path('user/<int:user_id>', views.show_user, name='show_user')
 ]

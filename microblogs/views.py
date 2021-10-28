@@ -11,8 +11,8 @@ class UserListView(generic.ListView):
         context = super().get_context_data(**kwargs)
         return context
 
-# def new_post(request):
-#     return render(request, 'feed.html')
+def new_post(request):
+    return render(request, 'feed.html')
 
 
 def show_user(request, user_id):
