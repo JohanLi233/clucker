@@ -1,13 +1,14 @@
-<html>
-<head>
-  <title>Clucker</title>
-</head>
-  <body>
-    <h1>Feed</h1>
-    <p><b>UNDER CONSTRUCTION</b>: This page will contain a user-specific feed of clucks.</p>
-    <form action="{% url 'feed' %}" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="post">
-  </body>
-</html>
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 offset-md-3">
+      <h1>Feed</h1>
+      <form action="{% url 'feed' %}" method="post">
+        {% csrf_token %}
+        {% include 'partials/bootstrap_form.html' with form=form %}
+        <input type="submit" value="post">
+      </div>
+    </div>
+  </div>
+{% endblock %}
