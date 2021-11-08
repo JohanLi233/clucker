@@ -10,13 +10,13 @@ class LogOutViewTestCase(TestCase, LogInTester):
     def setUp(self):
         self.url = reverse('log_out')
         self.user = User.objects.create_user('@johndoe',
-        first_name='John',
-        last_name='Doe',
-        email='johndoe@example.org',
-        bio='Hello, I am John Doe.',
-        password='Password123',
-        is_active=True,
-    )
+            first_name='John',
+            last_name='Doe',
+            email='johndoe@example.org',
+            bio='Hello, I am John Doe.',
+            password='Password123',
+            is_active=True,
+        )
 
     def test_log_out_url(self):
         self.assertEqual(self.url,'/log_out/')

@@ -7,7 +7,7 @@
       <form action="{% url 'log_in' %}" method="post">
         {% csrf_token %}
         {% include 'partials/bootstrap_form.html' with form=form %}
-        <input type="submit" value="Log in" class='btn btn-primary'>
+        <input type="submit" value="Log in" class="btn btn-primary">
       </form>
     </div>
   </div>

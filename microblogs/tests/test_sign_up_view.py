@@ -6,8 +6,8 @@ from microblogs.forms import SignUpForm
 from microblogs.models import User
 from .helpers import LogInTester
 
-
 class SignUpViewTestCase(TestCase, LogInTester):
+    """Tests of the sign up view."""
 
     def setUp(self):
         self.url = reverse('sign_up')
@@ -18,7 +18,7 @@ class SignUpViewTestCase(TestCase, LogInTester):
             'email': 'janedoe@example.org',
             'bio': 'My bio',
             'new_password': 'Password123',
-            'confirm_password': 'Password123'
+            'password_confirmation': 'Password123'
         }
 
     def test_sign_up_url(self):
