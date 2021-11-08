@@ -4,21 +4,36 @@ from .forms import LogInForm, SignUpForm, PostForm
 from django.contrib import messages
 from .models import User, Post;
 from django.views import generic
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseForbidden
 
-class UserListView(generic.ListView):
-    model = User
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'user_list.html', {'users': users})
 
 def new_post(request):
-    return render(request, 'feed.html')
-
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            current_user = request.user
+            form = PostForm(request.POST)
+            if form.is_valid():
+                text = form.cleaned_data.get('text')
+                post = Post.objects.create(author=current_user, text=text)
+                return redirect('feed')
+            else:
+                return render(request, 'feed.html', {'form': form})
+        else:
+            return redirect('log_in')
+    else:
+        return HttpResponseForbidden()
 
 def show_user(request, user_id):
-    user = User.objects.filter(id=user_id)
-    #reverse('show_user', kwargs={'user_id': id})
-    return render(request, 'show_user.html')
+    try:
+        user = User.objects.get(id=user_id)
+    except ObjectDoesNotExist:
+        return redirect('user_list')
+    else:
+        return render(request, 'show_user.html', {'user': user})
 
 def home(request):
     return render(request, 'home.html')

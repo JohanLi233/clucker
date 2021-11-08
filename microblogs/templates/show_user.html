@@ -1,9 +1,10 @@
-<html>
-<head>
-  <title>show user</title>
-</head>
- <body>
-  <h1>show user</h1>
-  <p><a href='{% url 'show_user' id %}'>Show User</a></p>
-</body>
-</html>
+{% extends 'base_content.html' %}
+{% block content %}
+<div class="container">
+  <div class="row content">
+    <div class="col-xs-12 col-lg-6 col-xl-4">
+      {% include 'partials/user_profile.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}
