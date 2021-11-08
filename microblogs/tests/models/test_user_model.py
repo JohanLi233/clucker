@@ -6,7 +6,10 @@ from microblogs.models import User
 class UserModelTestCase(TestCase):
     """Unit tests for the User model."""
 
-    fixtures=['microblogs/tests/fixtures/default_user.json']
+    fixtures=[
+    'microblogs/tests/fixtures/default_user.json',
+    'microblogs/tests/fixtures/other_users.json'
+    ]
 
     def setUp(self):
         self.user = User.objects.get(username='@johndoe')
@@ -27,7 +30,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_username_must_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(username='@janedoe')
         self.user.username = second_user.username
         self._assert_user_is_invalid()
 
@@ -57,7 +60,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_first_name_need_not_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(username='@janedoe')
         self.user.first_name = second_user.first_name
         self._assert_user_is_valid()
 
@@ -75,7 +78,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_last_name_need_not_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(username='@janedoe')
         self.user.last_name = second_user.last_name
         self._assert_user_is_valid()
 
@@ -93,7 +96,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_email_must_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(username='@janedoe')
         self.user.email = second_user.email
         self._assert_user_is_invalid()
 
@@ -123,7 +126,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_valid()
 
     def test_bio_need_not_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(username='@janedoe')
         self.user.bio = second_user.bio
         self._assert_user_is_valid()
 
@@ -146,14 +149,3 @@ class UserModelTestCase(TestCase):
     def _assert_user_is_invalid(self):
         with self.assertRaises(ValidationError):
             self.user.full_clean()
-
-    def _create_second_user(self):
-        user = User.objects.create_user(
-            '@janedoe',
-            first_name='Jane',
-            last_name='Doe',
-            email='janedoe@example.org',
-            password='Password123',
-            bio="This is Jane's profile."
-        )
-        return user

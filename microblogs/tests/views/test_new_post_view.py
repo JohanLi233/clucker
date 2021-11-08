@@ -4,7 +4,10 @@ from microblogs.models import Post, User
 
 
 class NewPostTest(TestCase):
-    fixtures=['microblogs/tests/fixtures/default_user.json']
+    fixtures=[
+    'microblogs/tests/fixtures/default_user.json',
+    'microblogs/tests/fixtures/other_users.json'
+    ]
 
     def setUp(self):
         super(TestCase, self).setUp()
@@ -60,14 +63,7 @@ class NewPostTest(TestCase):
 
     def test_cannot_create_post_for_other_user(self):
         self.client.login(username='@johndoe', password='Password123')
-        other_user = User.objects.create_user(
-            '@janedoe',
-            first_name='Jane',
-            last_name='Doe',
-            email='janedoe@example.org',
-            password='Password123',
-            bio='The quick brown fox jumps over the lazy dog.'
-        )
+        other_user = User.objects.get(username='@janedoe')
         self.data['author'] = other_user.id
         user_count_before = Post.objects.count()
         response = self.client.post(self.url, self.data, follow=True)
