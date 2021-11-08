@@ -7,16 +7,11 @@ from microblogs.tests.helpers import LogInTester
 class LogOutViewTestCase(TestCase, LogInTester):
     """Tests of the log out view."""
 
+    fixtures=['microblogs/tests/fixtures/default_user.json']
+
     def setUp(self):
         self.url = reverse('log_out')
-        self.user = User.objects.create_user('@johndoe',
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            bio='Hello, I am John Doe.',
-            password='Password123',
-            is_active=True,
-        )
+        self.user = User.objects.get(username='@johndoe')
 
     def test_log_out_url(self):
         self.assertEqual(self.url,'/log_out/')

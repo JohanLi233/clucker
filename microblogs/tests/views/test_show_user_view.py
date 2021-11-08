@@ -3,15 +3,10 @@ from django.urls import reverse
 from microblogs.models import User
 
 class ShowUserTest(TestCase):
+    fixtures=['microblogs/tests/fixtures/default_user.json']
+
     def setUp(self):
-        self.user = User.objects.create_user(
-            '@johndoe',
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            password='Password123',
-            bio='The quick brown fox jumps over the lazy dog.'
-        )
+        self.user = User.objects.get(username='@johndoe')
         self.url = reverse('show_user', kwargs={'user_id': self.user.id})
 
     def test_show_user_url(self):

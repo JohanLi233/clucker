@@ -3,16 +3,11 @@ from django.test import TestCase
 from microblogs.models import Post, User
 
 class PostTest(TestCase):
+    fixtures=['microblogs/tests/fixtures/default_user.json']
+
     def setUp(self):
         super(TestCase, self).setUp()
-        self.user = User.objects.create_user(
-            '@johndoe',
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            password='Password123',
-            bio='The quick brown fox jumps over the lazy dog.'
-        )
+        self.user = User.objects.get(username='@johndoe')
         self.post = Post(
             author=self.user,
             text="The quick brown fox jumps over the lazy dog."
