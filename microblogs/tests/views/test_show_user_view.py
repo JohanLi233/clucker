@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from microblogs.models import User, Post
-from microblogs.tests.helpers import reverse_with_next
+from microblogs.tests.helpers import reverse_with_next, create_post
 
 class ShowUserTest(TestCase):
     fixtures=[
@@ -48,9 +48,3 @@ class ShowUserTest(TestCase):
             self.assertContains(response, f'Post__{count}')
         for count in range(200, 203):
             self.assertNotContains(response, f'Post__{count}')
-
-def create_post(author, from_count, to_count):
-    for count in range (from_count, to_count):
-        text = f'Post__{count}'
-        post = Post(author=author, text=text)
-        post.save()

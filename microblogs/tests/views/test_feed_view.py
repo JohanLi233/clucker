@@ -3,12 +3,15 @@ from django.test import TestCase
 from django.urls import reverse
 from microblogs.forms import PostForm
 from microblogs.models import User
-from microblogs.tests.helpers import reverse_with_next
+from microblogs.tests.helpers import reverse_with_next, create_post
 
 class FeedViewTestCase(TestCase):
     """Tests of the feed view."""
 
-    fixtures=['microblogs/tests/fixtures/default_user.json']
+    fixtures=[
+    'microblogs/tests/fixtures/default_user.json',
+    'microblogs/tests/fixtures/other_users.json'
+    ]
 
     def setUp(self):
         self.user = User.objects.get(username='@johndoe')
@@ -30,3 +33,14 @@ class FeedViewTestCase(TestCase):
         response = self.client.get(self.url)
         redirect_url = reverse_with_next('log_in', self.url)
         self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)
+
+    def test_feed_shows_users_own_posts(self):
+        self.client.login(username=self.user.username, password='Password123')
+        other_user = User.objects.get(username = '@janedoe')
+        create_post(other_user, 100, 103)
+        create_post(self.user, 200, 203)
+        response = self.client.get(self.url)
+        for count in range(100, 103):
+            self.assertNotContains(response, f'Post__{count}')
+        for count in range(200, 203):
+            self.assertContains(response, f'Post__{count}')
