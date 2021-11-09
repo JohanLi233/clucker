@@ -8,6 +8,7 @@ from django.shortcuts import redirect, render
 from .forms import LogInForm, PostForm, SignUpForm
 from .models import Post, User
 
+@login_required
 def feed(request):
     form = PostForm()
     return render(request, 'feed.html', {'form': form})
