@@ -7,14 +7,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from .forms import LogInForm, PostForm, SignUpForm
 from .models import Post, User
-
-def login_prohibited(view_function):
-    def modified_view_function(request):
-        if request.user.is_authenticated:
-            return redirect('feed')
-        else:
-            return view_function(request)
-    return modified_view_function
+from .helpers import login_prohibited
 
 @login_required
 def feed(request):
