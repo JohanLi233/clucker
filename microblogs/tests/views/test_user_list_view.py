@@ -1,21 +1,26 @@
 from django.test import TestCase
 from django.urls import reverse
 from microblogs.models import User
+from microblogs.tests.helpers import reverse_with_next
 
 class UserListTest(TestCase):
+    fixtures=['microblogs/tests/fixtures/default_user.json']
+
     def setUp(self):
         self.url = reverse('user_list')
+        self.user = User.objects.get(username='@johndoe')
 
     def test_user_list_url(self):
         self.assertEqual(self.url,'/users/')
 
     def test_get_user_list(self):
-        self._create_test_users(15)
+        self._create_test_users(14)
+        self.client.login(username=self.user.username, password='Password123')
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user_list.html')
         self.assertEqual(len(response.context['users']), 15)
-        for user_id in range(15):
+        for user_id in range(14):
             self.assertContains(response, f'@user{user_id}')
             self.assertContains(response, f'First{user_id}')
             self.assertContains(response, f'Last{user_id}')
@@ -32,3 +37,8 @@ class UserListTest(TestCase):
                 last_name=f'Last{user_id}',
                 bio=f'Bio {user_id}',
             )
+
+    def test_get_user_list_redirect_when_not_logged_in(self):
+        response = self.client.get(self.url)
+        redirect_url = reverse_with_next(login. self.url)
+        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)

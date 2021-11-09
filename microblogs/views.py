@@ -1,4 +1,5 @@
 """Views of the microblogs app."""
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
@@ -51,6 +52,7 @@ def show_user(request, user_id):
     else:
         return render(request, 'show_user.html', {'user': user})
 
+@login_required
 def user_list(request):
     users = User.objects.all()
     return render(request, 'user_list.html', {'users': users})
