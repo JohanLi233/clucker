@@ -21,10 +21,12 @@ def log_in(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('feed')
+                redirect_url = request.POST.get('next') or 'feed'
+                return redirect(redirect_url)
         messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
     form = LogInForm()
-    return render(request, 'log_in.html', {'form': form})
+    next = request.GET.get('next') or ''
+    return render(request, 'log_in.html', {'form': form, 'next': next})
 
 def log_out(request):
     logout(request)

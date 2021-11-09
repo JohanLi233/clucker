@@ -11,7 +11,7 @@ class UserListTest(TestCase):
         self.user = User.objects.get(username='@johndoe')
 
     def test_user_list_url(self):
-        self.assertEqual(self.url,'/users/')
+        self.assert_(self.url, 'users/')
 
     def test_get_user_list(self):
         self._create_test_users(14)
@@ -40,5 +40,5 @@ class UserListTest(TestCase):
 
     def test_get_user_list_redirect_when_not_logged_in(self):
         response = self.client.get(self.url)
-        redirect_url = reverse_with_next(login. self.url)
+        redirect_url = reverse_with_next('log_in', self.url)
         self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200)
