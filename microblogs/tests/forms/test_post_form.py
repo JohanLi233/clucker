@@ -3,10 +3,10 @@ from microblogs.models import User, Post
 from microblogs.forms import PostForm
 
 class PostFormTestCase(TestCase):
-    fixtures=['microblogs/tests/fixtures/default_user.json']
+
+    fixtures = ['microblogs/tests/fixtures/default_user.json']
 
     def setUp(self):
-        super(TestCase, self).setUp()
         self.user = User.objects.get(username='@johndoe')
 
     def test_valid_post_form(self):

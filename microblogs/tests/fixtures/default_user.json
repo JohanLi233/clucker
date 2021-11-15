@@ -7,8 +7,8 @@
       "last_name": "Doe",
       "username": "@johndoe",
       "email": "johndoe@example.org",
-      "bio": "Hello, I am John Doe.",
-      "password": "pbkdf2_sha256$260000$kBW9I30Qb87mxtHj0isNeu$86/CRrhkiosMw/09pDTBtQrhMPvBBgJ+JesO94UdGDg=",
+      "bio": "Hello, I'm John Doe.",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
       "is_active": true
     }
   }

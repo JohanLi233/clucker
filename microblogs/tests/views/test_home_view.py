@@ -6,19 +6,10 @@ from microblogs.models import User
 class HomeViewTestCase(TestCase):
     """Tests of the home view."""
 
-    fixtures=['microblogs/tests/fixtures/default_user.json']
+    fixtures = ['microblogs/tests/fixtures/default_user.json']
 
     def setUp(self):
         self.url = reverse('home')
-        self.form_input = {
-            'first_name': 'Jane',
-            'last_name': 'Doe',
-            'username': '@janedoe',
-            'email': 'janedoe@example.org',
-            'bio': 'My bio',
-            'new_password': 'Password123',
-            'password_confirmation': 'Password123'
-        }
         self.user = User.objects.get(username='@johndoe')
 
     def test_home_url(self):
@@ -29,7 +20,7 @@ class HomeViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_get_home_with_redirects_when_logged_in(self):
+    def test_get_home_redirects_when_logged_in(self):
         self.client.login(username=self.user.username, password="Password123")
         response = self.client.get(self.url, follow=True)
         redirect_url = reverse('feed')

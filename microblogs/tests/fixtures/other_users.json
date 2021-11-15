@@ -7,8 +7,34 @@
       "last_name": "Doe",
       "username": "@janedoe",
       "email": "janedoe@example.org",
-      "bio": "Hello, I am Jane Doe.",
-      "password": "pbkdf2_sha256$260000$kBW9I30Qb87mxtHj0isNeu$86/CRrhkiosMw/09pDTBtQrhMPvBBgJ+JesO94UdGDg=",
+      "bio": "The quick brown fox jumps over the lazy dog.",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
+      "is_active": true
+    }
+  },
+  {
+    "model": "microblogs.user",
+    "pk": 3,
+    "fields": {
+      "first_name": "Petra",
+      "last_name": "Pickles",
+      "username": "@petrapickles",
+      "email": "petrapickles@example.org",
+      "bio": "The quick brown fox jumps over the lazy dog.",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
+      "is_active": true
+    }
+  },
+  {
+    "model": "microblogs.user",
+    "pk": 4,
+    "fields": {
+      "first_name": "Peter",
+      "last_name": "Pickles",
+      "username": "@peterpickles",
+      "email": "peterpickles@example.org",
+      "bio": "The quick brown fox jumps over the lazy dog.",
+      "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
       "is_active": true
     }
   }

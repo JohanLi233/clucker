@@ -2,11 +2,11 @@ from django.test import TestCase
 from django.urls import reverse
 from microblogs.models import Post, User
 
-
 class NewPostTest(TestCase):
-    fixtures=[
-    'microblogs/tests/fixtures/default_user.json',
-    'microblogs/tests/fixtures/other_users.json'
+
+    fixtures = [
+        'microblogs/tests/fixtures/default_user.json',
+        'microblogs/tests/fixtures/other_users.json'
     ]
 
     def setUp(self):

@@ -1,5 +1,5 @@
-from django.shortcuts import redirect
 from django.conf import settings
+from django.shortcuts import redirect
 
 def login_prohibited(view_function):
     def modified_view_function(request):

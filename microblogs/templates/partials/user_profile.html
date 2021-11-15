@@ -9,6 +9,24 @@
 </div>
 <div class="row content">
   <div class="col-12">
-    <p class="profile-bio">{{ user.bio }}</p>
+    <form action="{% url 'follow_toggle' user_id=user.id %}" method="get">
+      <p class="profile-bio">{{ user.bio }}</p>
+      <p class="profile-statistics">
+        <span>
+          <b>{{ user.followee_count }}</b> Following
+          &emsp;
+          <b>{{ user.follower_count }}</b> Followers
+        </span>
+        <span class="float-end">
+          {% if followable %}
+            {% if following %}
+              <button class="btn btn-secondary">Unfollow</button>
+            {% else %}
+              <button class="btn btn-primary">Follow</button>
+            {% endif %}
+          {% endif %}
+        </span>
+      </p>
+    </form>
   </div>
 </div>
