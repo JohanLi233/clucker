@@ -1,7 +1,9 @@
 asgiref==3.4.1
 coverage==6.0.1
 Django==3.2.5
+django-bootstrap-pagination==1.7.1
 django-widget-tweaks==1.4.8
+django-with-asserts==0.0.1
 Faker==8.10.3
 humanize==3.12.0
 libgravatar==1.0.0

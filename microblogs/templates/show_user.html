@@ -6,7 +6,9 @@
       {% include 'partials/user_profile.html' with following=following followable=followable %}
     </div>
     <div class="col-xs-12 col-lg-6 col-xl-8">
+      {% include 'partials/post_pager.html' with page_obj=page_obj%}
       {% include 'partials/posts_as_table.html' with posts=posts %}
+      {% include 'partials/post_pager.html' with page_obj=page_obj%}
     </div>
   </div>
 </div>

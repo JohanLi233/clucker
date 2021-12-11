@@ -24,6 +24,11 @@ class User(AbstractUser):
         'self', symmetrical=False, related_name='followees'
     )
 
+    class Meta:
+        """Model options."""
+
+        ordering = ['last_name', 'first_name']
+
     def full_name(self):
         return f'{self.first_name} {self.last_name}'
 

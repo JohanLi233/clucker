@@ -11,8 +11,9 @@
       </form>
     </div>
     <div class="col-xs-12 col-lg-6 col-xl-8">
-      <h1>Feed</h1>
+      {% include 'partials/post_pager.html' with page_obj=page_obj%}
       {% include 'partials/posts_as_table.html' with posts=posts %}
+      {% include 'partials/post_pager.html' with page_obj=page_obj%}
     </div>
   </div>
 </div>

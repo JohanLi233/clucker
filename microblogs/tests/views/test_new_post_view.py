@@ -24,7 +24,7 @@ class NewPostTest(TestCase):
         response = self.client.get(self.url, follow=True)
         user_count_after = Post.objects.count()
         self.assertEqual(user_count_after, user_count_before)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 405)
 
     def test_post_new_post_redirects_when_not_logged_in(self):
         user_count_before = Post.objects.count()
